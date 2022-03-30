@@ -5,19 +5,11 @@ data "azurerm_subnet" "spcc_subnet" {
   resource_group_name  = var.vnet_rg
 }
 
-# output "subnet_id" {
-#   value = data.azurerm_subnet.spcc_subnet.id
-# }
-
 # Get Key Vault ID
 data "azurerm_key_vault" "spcc_administrator_kv" {
   name                = var.administrator_kv_name
   resource_group_name = var.administrator_kv_rg
 }
-
-# output "keyvault_id" {
-#   value = data.azurerm_key_vault.spcc_administrator_kv.id
-# }
 
 # Get Availability Set ID
 data "azurerm_availability_set" "spcc_availability_set" {
@@ -25,10 +17,6 @@ data "azurerm_availability_set" "spcc_availability_set" {
   name                = var.availability_set_name
   resource_group_name = var.resource_group_name
 }
-
-# output "availability_set_id" {
-#   value = var.availability_set_name == "" ? null : data.azurerm_availability_set.spcc_availability_set[0].id
-# }
 
 # Create a User Assigned Identity (USId) if use_user_assigned_identity == "true"
 resource "azurerm_user_assigned_identity" "spcc_usid" {
@@ -206,11 +194,3 @@ resource "azurerm_virtual_machine" "spcc_vm" {
 
 }
 
-# Add VM to the VM Backup Facility in Azure Recovery Vault
-# resource "azurerm_backup_protected_vm" "backup_protected_virtual_machine" {
-#   depends_on = [azurerm_virtual_machine.spcc_vm]
-#   resource_group_name = var.recovery_vault_rg
-#   recovery_vault_name = var.recovery_vault_name
-#   source_vm_id        = azurerm_virtual_machine.spcc_vm.id
-#   backup_policy_id    = var.backup_policy_id
-# }

@@ -107,7 +107,3 @@ variable "msi_rg" {
 variable "use_user_assigned_identity" {
   description = "The flag to define if User Assigned Identity will be used for the VM"
 }
-
-# variable recovery_vault_rg {}
-# variable recovery_vault_name {}
-# variable backup_policy_id {}
